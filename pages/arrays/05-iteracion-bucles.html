@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iteración y Bucles - Curso de JavaScript</title>
+    <link rel="stylesheet" href="../../styles/variables.css">
+    <link rel="stylesheet" href="../../styles/reset.css">
+    <link rel="stylesheet" href="../../styles/components.css">
+    <link rel="stylesheet" href="../../styles/responsive.css">
+    <script src="../../scripts/navigation.js"></script>
+    <script src="../../scripts/theme.js"></script>
+</head>
+<body>
+    <main class="page-content">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="../../index.html">Home</a>
+                <span class="breadcrumb-separator">/</span>
+                <a href="../temario-global.html">Temario Global</a>
+                <span class="breadcrumb-separator">/</span>
+                <a href="../temario-arrays.html">Arrays</a>
+                <span class="breadcrumb-separator">/</span>
+                <span>Iteración y Bucles</span>
+            </div>
+            
+            <section class="section">
+                <h1 class="section-title">5. Iteración y Bucles en Arrays</h1>
+                
+                <div class="content-section">
+                    <h2>5.1. Uso de bucles para recorrer arrays</h2>
+                    
+                    <h3>Bucle for tradicional:</h3>
+                    <pre><code>const frutas = ['manzana', 'banana', 'naranja'];
+
+for (let i = 0; i < frutas.length; i++) {
+    console.log(`Índice ${i}: ${frutas[i]}`);
+}
+// Índice 0: manzana
+// Índice 1: banana
+// Índice 2: naranja</code></pre>
+                    
+                    <h3>Bucle for...of (recomendado para arrays):</h3>
+                    <pre><code>const colores = ['rojo', 'verde', 'azul'];
+
+for (const color of colores) {
+    console.log(color);
+}
+// rojo
+// verde
+// azul
+
+// Con índice usando entries()
+for (const [indice, color] of colores.entries()) {
+    console.log(`${indice}: ${color}`);
+}</code></pre>
+                    
+                    <h3>Bucle while:</h3>
+                    <pre><code>const numeros = [1, 2, 3, 4, 5];
+let i = 0;
+
+while (i < numeros.length) {
+    console.log(numeros[i]);
+    i++;
+}</code></pre>
+                    
+                    <h3>Bucle do...while:</h3>
+                    <pre><code>const animales = ['perro', 'gato', 'conejo'];
+let j = 0;
+
+do {
+    console.log(animales[j]);
+    j++;
+} while (j < animales.length);</code></pre>
+                </div>
+                
+                <div class="content-section">
+                    <h2>5.2. Método forEach()</h2>
+                    <p>El método <code>forEach()</code> ejecuta una función por cada elemento del array.</p>
+                    
+                    <h3>Sintaxis básica:</h3>
+                    <pre><code>const frutas = ['manzana', 'banana', 'naranja'];
+
+frutas.forEach(function(fruta) {
+    console.log(fruta);
+});
+
+// Con arrow function
+frutas.forEach(fruta => console.log(fruta));</code></pre>
+                    
+                    <h3>Con índice y array completo:</h3>
+                    <pre><code>const numeros = [10, 20, 30];
+
+numeros.forEach((numero, indice, arrayCompleto) => {
+    console.log(`Índice ${indice}: ${numero}`);
+    console.log('Array completo:', arrayCompleto);
+});</code></pre>
+                    
+                    <h3>Ejemplos prácticos:</h3>
+                    <pre><code>// Sumar todos los elementos
+const numeros = [1, 2, 3, 4, 5];
+let suma = 0;
+
+numeros.forEach(num => {
+    suma += num;
+});
+console.log(suma); // 15
+
+// Modificar elementos (nota: no modifica el array original directamente)
+const precios = [10, 20, 30];
+const preciosConIVA = [];
+
+precios.forEach(precio => {
+    preciosConIVA.push(precio * 1.21);
+});
+console.log(preciosConIVA); // [12.1, 24.2, 36.3]</code></pre>
+                    
+                    <h3>Diferencias importantes:</h3>
+                    <ul>
+                        <li><code>forEach()</code> no retorna ningún valor (retorna undefined)</li>
+                        <li>No se puede usar <code>break</code> o <code>continue</code> dentro de <code>forEach()</code></li>
+                        <li>Es ideal para ejecutar efectos secundarios (side effects)</li>
+                    </ul>
+                </div>
+                
+                <div class="content-section">
+                    <h2>Comparación de métodos de iteración</h2>
+                    <pre><code>const numeros = [1, 2, 3, 4, 5];
+
+// for tradicional - más control, permite break/continue
+for (let i = 0; i < numeros.length; i++) {
+    if (numeros[i] === 3) break; // Se puede usar break
+    console.log(numeros[i]);
+}
+
+// for...of - más legible, permite break/continue
+for (const num of numeros) {
+    if (num === 3) continue; // Se puede usar continue
+    console.log(num);
+}
+
+// forEach - más funcional, no permite break/continue
+numeros.forEach(num => {
+    // No se puede usar break ni continue aquí
+    console.log(num);
+});</code></pre>
+                </div>
+                
+                <div class="content-section">
+                    <h3>📝 Ejercicios Prácticos</h3>
+                    
+                    <div class="card" style="margin-top: 1rem;">
+                        <p><strong>Ejercicio 1:</strong> Crea un array de números del 1 al 10. Usa un bucle <code>for</code> para imprimir solo los números pares.</p>
+                    </div>
+                    
+                    <div class="card" style="margin-top: 1rem;">
+                        <p><strong>Ejercicio 2:</strong> Dado el array <code>const palabras = ['hola', 'mundo', 'javascript']</code>, usa <code>for...of</code> para imprimir cada palabra en mayúsculas.</p>
+                    </div>
+                    
+                    <div class="card" style="margin-top: 1rem;">
+                        <p><strong>Ejercicio 3:</strong> Usa <code>forEach()</code> para calcular el promedio de un array de calificaciones.</p>
+                    </div>
+                    
+                    <div class="card" style="margin-top: 1rem;">
+                        <p><strong>Ejercicio 4:</strong> Crea un array de nombres y usa <code>forEach()</code> para crear un nuevo array con mensajes de saludo personalizados.</p>
+                    </div>
+                </div>
+                
+                <div class="page-navigation">
+                    <a href="./04-ordenacion-manipulacion.html" class="page-nav-link prev">
+                        <span>← Anterior</span>
+                        <strong>4. Ordenación y Manipulación</strong>
+                    </a>
+                    <a href="./06-metodos-transformacion.html" class="page-nav-link next">
+                        <span>Siguiente →</span>
+                        <strong>6. Métodos de Transformación</strong>
+                    </a>
+                </div>
+            </section>
+        </div>
+    </main>
+</body>
+</html>

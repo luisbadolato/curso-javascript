@@ -1,0 +1,123 @@
+/* Hero Section */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-hero);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-shapes {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: white;
+    padding: var(--spacing-xl);
+}
+
+.hero-title {
+    font-size: var(--text-6xl);
+    font-weight: 700;
+    margin-bottom: var(--spacing-lg);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    animation: fadeInUp 0.8s ease;
+}
+
+.hero-subtitle {
+    font-size: var(--text-xl);
+    margin-bottom: var(--spacing-xl);
+    opacity: 0.95;
+    animation: fadeInUp 1s ease;
+}
+
+.hero-button {
+    animation: fadeInUp 1.2s ease;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* SVG Shapes */
+.shape {
+    position: absolute;
+    opacity: var(--shape-opacity);
+    fill: white;
+}
+
+.shape-1 {
+    top: 10%;
+    left: 10%;
+    width: 150px;
+    height: 150px;
+    animation: float 6s ease-in-out infinite;
+}
+
+.shape-2 {
+    top: 60%;
+    right: 15%;
+    width: 120px;
+    height: 120px;
+    animation: float 7s ease-in-out infinite reverse;
+}
+
+.shape-3 {
+    bottom: 15%;
+    left: 15%;
+    width: 100px;
+    height: 100px;
+    animation: float 8s ease-in-out infinite;
+}
+
+.shape-4 {
+    top: 30%;
+    right: 25%;
+    width: 80px;
+    height: 80px;
+    animation: rotate 10s linear infinite;
+}
+
+.shape-5 {
+    bottom: 25%;
+    right: 10%;
+    width: 90px;
+    height: 90px;
+    animation: float 9s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0) translateX(0);
+    }
+    50% {
+        transform: translateY(-20px) translateX(10px);
+    }
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}

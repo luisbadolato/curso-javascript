@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operaciones Básicas - Curso de JavaScript</title>
+    <link rel="stylesheet" href="../../styles/variables.css">
+    <link rel="stylesheet" href="../../styles/reset.css">
+    <link rel="stylesheet" href="../../styles/components.css">
+    <link rel="stylesheet" href="../../styles/responsive.css">
+    <script src="../../scripts/navigation.js"></script>
+    <script src="../../scripts/theme.js"></script>
+</head>
+<body>
+    <main class="page-content">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="../../index.html">Home</a>
+                <span class="breadcrumb-separator">/</span>
+                <a href="../temario-global.html">Temario Global</a>
+                <span class="breadcrumb-separator">/</span>
+                <a href="../temario-arrays.html">Arrays</a>
+                <span class="breadcrumb-separator">/</span>
+                <span>Operaciones Básicas</span>
+            </div>
+            
+            <section class="section">
+                <h1 class="section-title">2. Operaciones Básicas con Arrays</h1>
+                
+                <div class="content-section">
+                    <h2>2.1. Agregar y eliminar elementos</h2>
+                    
+                    <h3>push() - Agregar al final</h3>
+                    <pre><code>const frutas = ['manzana', 'banana'];
+frutas.push('naranja'); // Agrega 'naranja' al final
+console.log(frutas); // ['manzana', 'banana', 'naranja']
+
+// Puede agregar múltiples elementos
+frutas.push('pera', 'uva');
+console.log(frutas); // ['manzana', 'banana', 'naranja', 'pera', 'uva']</code></pre>
+                    
+                    <h3>pop() - Eliminar del final</h3>
+                    <pre><code>const frutas = ['manzana', 'banana', 'naranja'];
+const ultimaFruta = frutas.pop(); // Elimina y retorna 'naranja'
+console.log(ultimaFruta); // 'naranja'
+console.log(frutas); // ['manzana', 'banana']</code></pre>
+                    
+                    <h3>unshift() - Agregar al inicio</h3>
+                    <pre><code>const numeros = [2, 3, 4];
+numeros.unshift(1); // Agrega 1 al inicio
+console.log(numeros); // [1, 2, 3, 4]
+
+// Puede agregar múltiples elementos
+numeros.unshift(-1, 0);
+console.log(numeros); // [-1, 0, 1, 2, 3, 4]</code></pre>
+                    
+                    <h3>shift() - Eliminar del inicio</h3>
+                    <pre><code>const numeros = [1, 2, 3, 4];
+const primerNumero = numeros.shift(); // Elimina y retorna 1
+console.log(primerNumero); // 1
+console.log(numeros); // [2, 3, 4]</code></pre>
+                </div>
+                
+                <div class="content-section">
+                    <h2>2.2. Modificar elementos existentes</h2>
+                    <pre><code>const colores = ['rojo', 'verde', 'azul'];
+
+// Modificar un elemento específico
+colores[1] = 'amarillo';
+console.log(colores); // ['rojo', 'amarillo', 'azul']
+
+// Modificar múltiples elementos
+colores[0] = 'negro';
+colores[2] = 'blanco';
+console.log(colores); // ['negro', 'amarillo', 'blanco']</code></pre>
+                </div>
+                
+                <div class="content-section">
+                    <h2>2.3. Longitud de un array: length</h2>
+                    <pre><code>const animales = ['perro', 'gato', 'conejo'];
+
+// Obtener la longitud
+console.log(animales.length); // 3
+
+// Usar length para acceder al último elemento
+console.log(animales[animales.length - 1]); // 'conejo'
+
+// Modificar la longitud para truncar el array
+animales.length = 2;
+console.log(animales); // ['perro', 'gato']
+
+// Aumentar la longitud crea espacios vacíos
+animales.length = 5;
+console.log(animales); // ['perro', 'gato', empty × 3]</code></pre>
+                </div>
+                
+                <div class="content-section">
+                    <h3>📝 Ejercicios Prácticos</h3>
+                    
+                    <div class="card" style="margin-top: 1rem;">
+                        <p><strong>Ejercicio 1:</strong> Crea un array vacío llamado <code>tareas</code>. Agrega 3 tareas usando <code>push()</code>. Luego elimina la última usando <code>pop()</code>.</p>
+                    </div>
+                    
+                    <div class="card" style="margin-top: 1rem;">
+                        <p><strong>Ejercicio 2:</strong> Dado el array <code>const cola = [3, 4, 5]</code>, agrega el número 2 al inicio y el número 6 al final. Imprime el resultado.</p>
+                    </div>
+                    
+                    <div class="card" style="margin-top: 1rem;">
+                        <p><strong>Ejercicio 3:</strong> Crea un array con 5 nombres. Elimina el primero y el último elemento. ¿Cuántos elementos quedan?</p>
+                    </div>
+                    
+                    <div class="card" style="margin-top: 1rem;">
+                        <p><strong>Ejercicio 4:</strong> Crea un array de números del 1 al 5. Modifica todos los valores multiplicándolos por 2. Imprime el array resultante.</p>
+                    </div>
+                </div>
+                
+                <div class="page-navigation">
+                    <a href="./01-introduccion.html" class="page-nav-link prev">
+                        <span>← Anterior</span>
+                        <strong>1. Introducción</strong>
+                    </a>
+                    <a href="./03-metodos-busqueda.html" class="page-nav-link next">
+                        <span>Siguiente →</span>
+                        <strong>3. Métodos de Búsqueda</strong>
+                    </a>
+                </div>
+            </section>
+        </div>
+    </main>
+</body>
+</html>

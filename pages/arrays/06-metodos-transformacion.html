@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Métodos de Transformación - Curso de JavaScript</title>
+    <link rel="stylesheet" href="../../styles/variables.css">
+    <link rel="stylesheet" href="../../styles/reset.css">
+    <link rel="stylesheet" href="../../styles/components.css">
+    <link rel="stylesheet" href="../../styles/responsive.css">
+    <script src="../../scripts/navigation.js"></script>
+    <script src="../../scripts/theme.js"></script>
+</head>
+<body>
+    <main class="page-content">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="../../index.html">Home</a>
+                <span class="breadcrumb-separator">/</span>
+                <a href="../temario-global.html">Temario Global</a>
+                <span class="breadcrumb-separator">/</span>
+                <a href="../temario-arrays.html">Arrays</a>
+                <span class="breadcrumb-separator">/</span>
+                <span>Métodos de Transformación</span>
+            </div>
+            
+            <section class="section">
+                <h1 class="section-title">6. Métodos de Transformación de Arrays</h1>
+                
+                <div class="content-section">
+                    <h2>6.1. Filtrar elementos: filter()</h2>
+                    <p>El método <code>filter()</code> crea un nuevo array con todos los elementos que cumplan la condición especificada.</p>
+                    
+                    <h3>Sintaxis básica:</h3>
+                    <pre><code>const numeros = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+// Filtrar números pares
+const pares = numeros.filter(num => num % 2 === 0);
+console.log(pares); // [2, 4, 6, 8, 10]
+
+// Filtrar números mayores a 5
+const mayores = numeros.filter(num => num > 5);
+console.log(mayores); // [6, 7, 8, 9, 10]</code></pre>
+                    
+                    <h3>Filtrar objetos:</h3>
+                    <pre><code>const productos = [
+    { nombre: 'Laptop', precio: 1000 },
+    { nombre: 'Mouse', precio: 25 },
+    { nombre: 'Teclado', precio: 50 },
+    { nombre: 'Monitor', precio: 300 }
+];
+
+// Productos con precio menor a 100
+const baratos = productos.filter(producto => producto.precio < 100);
+console.log(baratos);
+// [{ nombre: 'Mouse', precio: 25 }, { nombre: 'Teclado', precio: 50 }]</code></pre>
+                    
+                    <h3>Filtrar con múltiples condiciones:</h3>
+                    <pre><code>const personas = [
+    { nombre: 'Ana', edad: 25, ciudad: 'Madrid' },
+    { nombre: 'Luis', edad: 30, ciudad: 'Barcelona' },
+    { nombre: 'María', edad: 22, ciudad: 'Madrid' },
+    { nombre: 'Pedro', edad: 35, ciudad: 'Valencia' }
+];
+
+// Personas de Madrid mayores de 23 años
+const resultado = personas.filter(p => p.ciudad === 'Madrid' && p.edad > 23);
+console.log(resultado); // [{ nombre: 'Ana', edad: 25, ciudad: 'Madrid' }]</code></pre>
+                </div>
+                
+                <div class="content-section">
+                    <h2>6.2. Transformar elementos: map()</h2>
+                    <p>El método <code>map()</code> crea un nuevo array con los resultados de aplicar una función a cada elemento.</p>
+                    
+                    <h3>Transformaciones simples:</h3>
+                    <pre><code>const numeros = [1, 2, 3, 4, 5];
+
+// Multiplicar cada número por 2
+const dobles = numeros.map(num => num * 2);
+console.log(dobles); // [2, 4, 6, 8, 10]
+
+// Convertir a strings
+const strings = numeros.map(num => `Número ${num}`);
+console.log(strings); // ['Número 1', 'Número 2', ...]</code></pre>
+                    
+                    <h3>Transformar objetos:</h3>
+                    <pre><code>const usuarios = [
+    { nombre: 'Ana', edad: 25 },
+    { nombre: 'Luis', edad: 30 },
+    { nombre: 'María', edad: 22 }
+];
+
+// Extraer solo los nombres
+const nombres = usuarios.map(usuario => usuario.nombre);
+console.log(nombres); // ['Ana', 'Luis', 'María']
+
+// Crear nuevos objetos con propiedades adicionales
+const usuariosConId = usuarios.map((usuario, index) => ({
+    id: index + 1,
+    ...usuario
+}));
+console.log(usuariosConId);
+// [{ id: 1, nombre: 'Ana', edad: 25 }, ...]</code></pre>
+                    
+                    <h3>Combinar map() y otros métodos:</h3>
+                    <pre><code>const precios = [10, 20, 30, 40, 50];
+
+// Aplicar descuento del 20% y redondear
+const preciosConDescuento = precios
+    .map(precio => precio * 0.8)
+    .map(precio => Math.round(precio));
+console.log(preciosConDescuento); // [8, 16, 24, 32, 40]</code></pre>
+                </div>
+                
+                <div class="content-section">
+                    <h2>6.3. Reducir arrays a un valor único: reduce()</h2>
+                    <p>El método <code>reduce()</code> ejecuta una función reductora sobre cada elemento, devolviendo un único valor resultante.</p>
+                    
+                    <h3>Sumar todos los elementos:</h3>
+                    <pre><code>const numeros = [1, 2, 3, 4, 5];
+
+const suma = numeros.reduce((acumulador, numero) => {
+    return acumulador + numero;
+}, 0); // 0 es el valor inicial del acumulador
+
+console.log(suma); // 15
+
+// Versión simplificada
+const suma2 = numeros.reduce((acc, num) => acc + num, 0);</code></pre>
+                    
+                    <h3>Encontrar el máximo:</h3>
+                    <pre><code>const numeros = [45, 12, 78, 23, 56];
+
+const maximo = numeros.reduce((max, num) => {
+    return num > max ? num : max;
+});
+console.log(maximo); // 78</code></pre>
+                    
+                    <h3>Contar ocurrencias:</h3>
+                    <pre><code>const frutas = ['manzana', 'banana', 'manzana', 'naranja', 'banana', 'manzana'];
+
+const conteo = frutas.reduce((acc, fruta) => {
+    acc[fruta] = (acc[fruta] || 0) + 1;
+    return acc;
+}, {});
+
+console.log(conteo);
+// { manzana: 3, banana: 2, naranja: 1 }</code></pre>
+                    
+                    <h3>Aplanar arrays:</h3>
+                    <pre><code>const arrays = [[1, 2], [3, 4], [5, 6]];
+
+const aplanado = arrays.reduce((acc, array) => {
+    return acc.concat(array);
+}, []);
+
+console.log(aplanado); // [1, 2, 3, 4, 5, 6]</code></pre>
+                    
+                    <h3>Combinar objetos:</h3>
+                    <pre><code>const carrito = [
+    { producto: 'Laptop', precio: 1000 },
+    { producto: 'Mouse', precio: 25 },
+    { producto: 'Teclado', precio: 50 }
+];
+
+const total = carrito.reduce((acc, item) => acc + item.precio, 0);
+console.log(total); // 1075</code></pre>
+                </div>
+                
+                <div class="content-section">
+                    <h2>Encadenar métodos (Method Chaining)</h2>
+                    <pre><code>const productos = [
+    { nombre: 'Laptop', precio: 1000, categoria: 'electrónica' },
+    { nombre: 'Camisa', precio: 50, categoria: 'ropa' },
+    { nombre: 'Mouse', precio: 25, categoria: 'electrónica' },
+    { nombre: 'Teclado', precio: 75, categoria: 'electrónica' },
+    { nombre: 'Pantalón', precio: 80, categoria: 'ropa' }
+];
+
+// Filtrar productos de electrónica, aplicar 10% descuento y sumar total
+const totalElectronica = productos
+    .filter(p => p.categoria === 'electrónica')
+    .map(p => p.precio * 0.9)
+    .reduce((total, precio) => total + precio, 0);
+
+console.log(totalElectronica); // 990</code></pre>
+                </div>
+                
+                <div class="content-section">
+                    <h3>📝 Ejercicios Prácticos</h3>
+                    
+                    <div class="card" style="margin-top: 1rem;">
+                        <p><strong>Ejercicio 1:</strong> Dado un array de edades, filtra los mayores de edad (>=18) y calcula su promedio.</p>
+                    </div>
+                    
+                    <div class="card" style="margin-top: 1rem;">
+                        <p><strong>Ejercicio 2:</strong> Transforma un array de temperaturas en Celsius a Fahrenheit usando <code>map()</code>. Fórmula: F = C * 9/5 + 32</p>
+                    </div>
+                    
+                    <div class="card" style="margin-top: 1rem;">
+                        <p><strong>Ejercicio 3:</strong> Dado un array de palabras, usa <code>reduce()</code> para crear una sola frase separada por espacios.</p>
+                    </div>
+                    
+                    <div class="card" style="margin-top: 1rem;">
+                        <p><strong>Ejercicio 4:</strong> Crea un array de productos con precio y stock. Filtra los que tienen stock, aplica 15% descuento y suma el valor total del inventario.</p>
+                    </div>
+                </div>
+                
+                <div class="page-navigation">
+                    <a href="./05-iteracion-bucles.html" class="page-nav-link prev">
+                        <span>← Anterior</span>
+                        <strong>5. Iteración y Bucles</strong>
+                    </a>
+                    <a href="./07-tecnicas-avanzadas.html" class="page-nav-link next">
+                        <span>Siguiente →</span>
+                        <strong>7. Técnicas Avanzadas</strong>
+                    </a>
+                </div>
+            </section>
+        </div>
+    </main>
+</body>
+</html>

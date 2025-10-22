@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Métodos de Búsqueda - Curso de JavaScript</title>
+    <link rel="stylesheet" href="../../styles/variables.css">
+    <link rel="stylesheet" href="../../styles/reset.css">
+    <link rel="stylesheet" href="../../styles/components.css">
+    <link rel="stylesheet" href="../../styles/responsive.css">
+    <script src="../../scripts/navigation.js"></script>
+    <script src="../../scripts/theme.js"></script>
+</head>
+<body>
+    <main class="page-content">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="../../index.html">Home</a>
+                <span class="breadcrumb-separator">/</span>
+                <a href="../temario-global.html">Temario Global</a>
+                <span class="breadcrumb-separator">/</span>
+                <a href="../temario-arrays.html">Arrays</a>
+                <span class="breadcrumb-separator">/</span>
+                <span>Métodos de Búsqueda</span>
+            </div>
+            
+            <section class="section">
+                <h1 class="section-title">3. Métodos de Búsqueda en Arrays</h1>
+                
+                <div class="content-section">
+                    <h2>3.1. Encontrar elementos</h2>
+                    
+                    <h3>find() - Encuentra el primer elemento que cumple la condición</h3>
+                    <pre><code>const numeros = [5, 12, 8, 130, 44];
+
+// Encontrar el primer número mayor a 10
+const resultado = numeros.find(num => num > 10);
+console.log(resultado); // 12
+
+// Si no encuentra nada, retorna undefined
+const noEncontrado = numeros.find(num => num > 200);
+console.log(noEncontrado); // undefined</code></pre>
+                    
+                    <h3>findIndex() - Encuentra el índice del primer elemento que cumple la condición</h3>
+                    <pre><code>const frutas = ['manzana', 'banana', 'naranja', 'pera'];
+
+const indice = frutas.findIndex(fruta => fruta === 'naranja');
+console.log(indice); // 2
+
+// Si no encuentra, retorna -1
+const noEncontrado = frutas.findIndex(fruta => fruta === 'kiwi');
+console.log(noEncontrado); // -1</code></pre>
+                    
+                    <h3>indexOf() - Encuentra el índice de un elemento específico</h3>
+                    <pre><code>const colores = ['rojo', 'verde', 'azul', 'verde'];
+
+console.log(colores.indexOf('verde')); // 1 (primera ocurrencia)
+console.log(colores.indexOf('amarillo')); // -1 (no existe)
+
+// Búsqueda desde un índice específico
+console.log(colores.indexOf('verde', 2)); // 3</code></pre>
+                    
+                    <h3>includes() - Verifica si existe un elemento</h3>
+                    <pre><code>const animales = ['perro', 'gato', 'conejo'];
+
+console.log(animales.includes('gato')); // true
+console.log(animales.includes('león')); // false</code></pre>
+                </div>
+                
+                <div class="content-section">
+                    <h2>3.2. Comprobar condiciones</h2>
+                    
+                    <h3>some() - Verifica si al menos un elemento cumple la condición</h3>
+                    <pre><code>const edades = [15, 18, 21, 25];
+
+// ¿Hay algún mayor de edad?
+const hayMayores = edades.some(edad => edad >= 18);
+console.log(hayMayores); // true
+
+// ¿Hay algún menor de 10?
+const hayMenores = edades.some(edad => edad < 10);
+console.log(hayMenores); // false</code></pre>
+                    
+                    <h3>every() - Verifica si todos los elementos cumplen la condición</h3>
+                    <pre><code>const numeros = [2, 4, 6, 8, 10];
+
+// ¿Todos son pares?
+const todosPares = numeros.every(num => num % 2 === 0);
+console.log(todosPares); // true
+
+// ¿Todos son mayores a 5?
+const todosMayores = numeros.every(num => num > 5);
+console.log(todosMayores); // false</code></pre>
+                </div>
+                
+                <div class="content-section">
+                    <h3>📝 Ejercicios Prácticos</h3>
+                    
+                    <div class="card" style="margin-top: 1rem;">
+                        <p><strong>Ejercicio 1:</strong> Dado el array <code>const precios = [20, 45, 10, 65, 30]</code>, encuentra el primer precio mayor a 50.</p>
+                    </div>
+                    
+                    <div class="card" style="margin-top: 1rem;">
+                        <p><strong>Ejercicio 2:</strong> Crea un array de objetos con usuarios (nombre y edad). Usa <code>findIndex()</code> para encontrar la posición del usuario llamado "María".</p>
+                    </div>
+                    
+                    <div class="card" style="margin-top: 1rem;">
+                        <p><strong>Ejercicio 3:</strong> Dado el array <code>const notas = [7, 8, 5, 9, 6]</code>, verifica si hay alguna nota aprobada (>=6) usando <code>some()</code>.</p>
+                    </div>
+                    
+                    <div class="card" style="margin-top: 1rem;">
+                        <p><strong>Ejercicio 4:</strong> Dado el array <code>const palabras = ['hola', 'mundo', 'javascript']</code>, verifica si todas las palabras tienen más de 3 caracteres usando <code>every()</code>.</p>
+                    </div>
+                </div>
+                
+                <div class="page-navigation">
+                    <a href="./02-operaciones-basicas.html" class="page-nav-link prev">
+                        <span>← Anterior</span>
+                        <strong>2. Operaciones Básicas</strong>
+                    </a>
+                    <a href="./04-ordenacion-manipulacion.html" class="page-nav-link next">
+                        <span>Siguiente →</span>
+                        <strong>4. Ordenación y Manipulación</strong>
+                    </a>
+                </div>
+            </section>
+        </div>
+    </main>
+</body>
+</html>

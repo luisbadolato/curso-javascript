@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buenas Prácticas - Curso de JavaScript</title>
+    <link rel="stylesheet" href="../../styles/variables.css">
+    <link rel="stylesheet" href="../../styles/reset.css">
+    <link rel="stylesheet" href="../../styles/components.css">
+    <link rel="stylesheet" href="../../styles/responsive.css">
+    <script src="../../scripts/navigation.js"></script>
+    <script src="../../scripts/theme.js"></script>
+</head>
+<body>
+    <main class="page-content">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="../../index.html">Home</a>
+                <span class="breadcrumb-separator">/</span>
+                <a href="../temario-global.html">Temario Global</a>
+                <span class="breadcrumb-separator">/</span>
+                <a href="../temario-arrays.html">Arrays</a>
+                <span class="breadcrumb-separator">/</span>
+                <span>Buenas Prácticas</span>
+            </div>
+            
+            <section class="section">
+                <h1 class="section-title">8. Buenas Prácticas con Arrays</h1>
+                
+                <div class="content-section">
+                    <h2>8.1. Evitar mutaciones innecesarias</h2>
+                    <p>Modificar un array directamente (mutación) puede llevar a bugs difíciles de detectar, especialmente en aplicaciones grandes.</p>
+                    
+                    <h3>❌ Mal - Mutación directa:</h3>
+                    <pre><code>const numeros = [1, 2, 3];
+numeros.push(4); // Muta el array original
+numeros[0] = 10; // Modifica el array original
+
+console.log(numeros); // [10, 2, 3, 4]</code></pre>
+                    
+                    <h3>✅ Bien - Crear nuevos arrays:</h3>
+                    <pre><code>const numeros = [1, 2, 3];
+
+// Agregar elementos sin mutar
+const conNuevo = [...numeros, 4];
+
+// Modificar elementos sin mutar
+const modificado = numeros.map((num, i) => i === 0 ? 10 : num);
+
+console.log(numeros);      // [1, 2, 3] - No se modifica
+console.log(conNuevo);     // [1, 2, 3, 4]
+console.log(modificado);   // [10, 2, 3]</code></pre>
+                </div>
+                
+                <div class="content-section">
+                    <h2>8.2. Uso de métodos inmutables</h2>
+                    <p>Prefiere métodos que devuelven nuevos arrays en lugar de modificar el original.</p>
+                    
+                    <h3>Métodos que mutan el array original:</h3>
+                    <ul>
+                        <li><code>push()</code>, <code>pop()</code></li>
+                        <li><code>shift()</code>, <code>unshift()</code></li>
+                        <li><code>splice()</code></li>
+                        <li><code>sort()</code></li>
+                        <li><code>reverse()</code></li>
+                    </ul>
+                    
+                    <h3>Métodos que NO mutan (devuelven nuevo array):</h3>
+                    <ul>
+                        <li><code>map()</code>, <code>filter()</code>, <code>reduce()</code></li>
+                        <li><code>slice()</code></li>
+                        <li><code>concat()</code></li>
+                        <li><code>flat()</code>, <code>flatMap()</code></li>
+                    </ul>
+                    
+                    <h3>Alternativas inmutables:</h3>
+                    <pre><code>const numeros = [3, 1, 4, 1, 5];
+
+// En lugar de sort() (muta)
+const ordenado = [...numeros].sort((a, b) => a - b);
+// o
+const ordenado2 = numeros.slice().sort((a, b) => a - b);
+
+// En lugar de reverse() (muta)
+const invertido = [...numeros].reverse();
+
+// En lugar de push() (muta)
+const conNuevo = [...numeros, 9];
+
+// En lugar de splice() (muta) para eliminar elemento
+const sinSegundo = numeros.filter((_, i) => i !== 1);
+
+console.log(numeros); // [3, 1, 4, 1, 5] - Original intacto</code></pre>
+                </div>
+                
+                <div class="content-section">
+                    <h2>8.3. Manejo de errores comunes con arrays</h2>
+                    
+                    <h3>Error 1: Acceso a índices fuera de rango</h3>
+                    <pre><code>const frutas = ['manzana', 'banana'];
+
+// ❌ No verifica si existe
+console.log(frutas[5].toUpperCase()); // Error: Cannot read property
+
+// ✅ Verifica antes de usar
+if (frutas[5]) {
+    console.log(frutas[5].toUpperCase());
+}
+
+// ✅ Mejor: usar optional chaining
+console.log(frutas[5]?.toUpperCase()); // undefined</code></pre>
+                    
+                    <h3>Error 2: Modificar array durante iteración</h3>
+                    <pre><code>const numeros = [1, 2, 3, 4, 5];
+
+// ❌ Mal - Modifica mientras itera
+numeros.forEach((num, i) => {
+    if (num % 2 === 0) {
+        numeros.splice(i, 1); // Causa problemas
+    }
+});
+
+// ✅ Bien - Usa filter
+const impares = numeros.filter(num => num % 2 !== 0);
+console.log(impares); // [1, 3, 5]</code></pre>
+                    
+                    <h3>Error 3: Comparar arrays con ==</h3>
+                    <pre><code>const arr1 = [1, 2, 3];
+const arr2 = [1, 2, 3];
+
+// ❌ Siempre será false (compara referencias)
+console.log(arr1 == arr2);   // false
+console.log(arr1 === arr2);  // false
+
+// ✅ Comparar contenido
+const sonIguales = JSON.stringify(arr1) === JSON.stringify(arr2);
+console.log(sonIguales); // true
+
+// ✅ Comparación más robusta
+const sonIguales2 = arr1.length === arr2.length && 
+    arr1.every((val, i) => val === arr2[i]);</code></pre>
+                    
+                    <h3>Error 4: No validar que sea un array</h3>
+                    <pre><code>function procesarArray(datos) {
+    // ❌ Asume que es un array
+    return datos.map(x => x * 2); // Error si datos no es array
+}
+
+function procesarArraySeguro(datos) {
+    // ✅ Valida primero
+    if (!Array.isArray(datos)) {
+        throw new Error('Se esperaba un array');
+    }
+    return datos.map(x => x * 2);
+}</code></pre>
+                    
+                    <h3>Error 5: Copia superficial vs profunda</h3>
+                    <pre><code>const original = [{ nombre: 'Ana' }, { nombre: 'Luis' }];
+
+// ❌ Copia superficial - los objetos se comparten
+const copia = [...original];
+copia[0].nombre = 'María';
+console.log(original[0].nombre); // 'María' - ¡Se modificó!
+
+// ✅ Copia profunda
+const copiaReal = JSON.parse(JSON.stringify(original));
+// o con structuredClone (moderno)
+const copiaReal2 = structuredClone(original);</code></pre>
+                </div>
+                
+                <div class="content-section">
+                    <h2>Consejos adicionales</h2>
+                    
+                    <div class="card">
+                        <h3>🎯 Usa const para arrays</h3>
+                        <p>Aunque no previene la mutación, evita reasignaciones accidentales.</p>
+                        <pre><code>const numeros = [1, 2, 3];
+// numeros = [4, 5, 6]; // Error
+numeros.push(4); // Permite mutación (usa métodos inmutables)</code></pre>
+                    </div>
+                    
+                    <div class="card" style="margin-top: 1rem;">
+                        <h3>🎯 Nombres descriptivos</h3>
+                        <pre><code>// ❌ Nombres poco claros
+const arr = [1, 2, 3];
+const data = ['Ana', 'Luis'];
+
+// ✅ Nombres descriptivos
+const edades = [25, 30, 22];
+const nombresUsuarios = ['Ana', 'Luis'];</code></pre>
+                    </div>
+                    
+                    <div class="card" style="margin-top: 1rem;">
+                        <h3>🎯 Verifica arrays vacíos</h3>
+                        <pre><code>const resultados = [];
+
+// ❌ No verifica
+console.log(resultados[0]); // undefined
+
+// ✅ Verifica longitud
+if (resultados.length > 0) {
+    console.log(resultados[0]);
+}</code></pre>
+                    </div>
+                    
+                    <div class="card" style="margin-top: 1rem;">
+                        <h3>🎯 Usa el método apropiado</h3>
+                        <pre><code>// Si necesitas transformar → map()
+// Si necesitas filtrar → filter()
+// Si necesitas reducir a un valor → reduce()
+// Si necesitas iterar con efectos secundarios → forEach()
+// Si necesitas buscar un elemento → find()
+// Si necesitas verificar existencia → some() / every()</code></pre>
+                    </div>
+                </div>
+                
+                <div class="content-section">
+                    <h3>📝 Ejercicios de Repaso</h3>
+                    
+                    <div class="card" style="margin-top: 1rem;">
+                        <p><strong>Ejercicio 1:</strong> Refactoriza este código para evitar mutaciones:</p>
+                        <pre><code>const tareas = ['Estudiar', 'Ejercicio'];
+tareas.push('Compras');
+tareas.sort();</code></pre>
+                    </div>
+                    
+                    <div class="card" style="margin-top: 1rem;">
+                        <p><strong>Ejercicio 2:</strong> Crea una función que reciba un array y devuelva una copia profunda del mismo.</p>
+                    </div>
+                    
+                    <div class="card" style="margin-top: 1rem;">
+                        <p><strong>Ejercicio 3:</strong> Escribe una función que compare dos arrays y retorne <code>true</code> si tienen el mismo contenido.</p>
+                    </div>
+                    
+                    <div class="card" style="margin-top: 1rem;">
+                        <p><strong>Ejercicio 4:</strong> Implementa una función segura que procese un array, validando primero que el parámetro sea efectivamente un array.</p>
+                    </div>
+                </div>
+                
+                <div class="content-section" style="margin-top: 2rem; background: linear-gradient(135deg, var(--button-bg), var(--button-hover)); color: white; text-align: center;">
+                    <h2>🎉 ¡Felicidades!</h2>
+                    <p style="color: white; opacity: 0.95;">Has completado el módulo de Arrays. Ahora tienes las herramientas necesarias para trabajar eficientemente con arrays en JavaScript.</p>
+                </div>
+                
+                <div class="page-navigation">
+                    <a href="./07-tecnicas-avanzadas.html" class="page-nav-link prev">
+                        <span>← Anterior</span>
+                        <strong>7. Técnicas Avanzadas</strong>
+                    </a>
+                    <a href="../temario-global.html" class="page-nav-link next">
+                        <span>Siguiente →</span>
+                        <strong>Volver al Temario Global</strong>
+                    </a>
+                </div>
+            </section>
+        </div>
+    </main>
+</body>
+</html>

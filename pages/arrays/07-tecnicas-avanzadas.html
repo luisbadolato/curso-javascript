@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Técnicas Avanzadas - Curso de JavaScript</title>
+    <link rel="stylesheet" href="../../styles/variables.css">
+    <link rel="stylesheet" href="../../styles/reset.css">
+    <link rel="stylesheet" href="../../styles/components.css">
+    <link rel="stylesheet" href="../../styles/responsive.css">
+    <script src="../../scripts/navigation.js"></script>
+    <script src="../../scripts/theme.js"></script>
+</head>
+<body>
+    <main class="page-content">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="../../index.html">Home</a>
+                <span class="breadcrumb-separator">/</span>
+                <a href="../temario-global.html">Temario Global</a>
+                <span class="breadcrumb-separator">/</span>
+                <a href="../temario-arrays.html">Arrays</a>
+                <span class="breadcrumb-separator">/</span>
+                <span>Técnicas Avanzadas</span>
+            </div>
+            
+            <section class="section">
+                <h1 class="section-title">7. Técnicas Avanzadas con Arrays</h1>
+                
+                <div class="content-section">
+                    <h2>7.1. Desestructuración de arrays</h2>
+                    <p>La desestructuración permite extraer valores de arrays y asignarlos a variables de forma concisa.</p>
+                    
+                    <h3>Desestructuración básica:</h3>
+                    <pre><code>const colores = ['rojo', 'verde', 'azul'];
+
+// Forma tradicional
+const color1 = colores[0];
+const color2 = colores[1];
+
+// Con desestructuración
+const [primero, segundo, tercero] = colores;
+console.log(primero);  // 'rojo'
+console.log(segundo);  // 'verde'
+console.log(tercero);  // 'azul'</code></pre>
+                    
+                    <h3>Saltar elementos:</h3>
+                    <pre><code>const numeros = [1, 2, 3, 4, 5];
+
+const [primero, , tercero, , quinto] = numeros;
+console.log(primero, tercero, quinto); // 1 3 5</code></pre>
+                    
+                    <h3>Resto de elementos (rest operator):</h3>
+                    <pre><code>const frutas = ['manzana', 'banana', 'naranja', 'pera', 'uva'];
+
+const [primera, segunda, ...resto] = frutas;
+console.log(primera);  // 'manzana'
+console.log(segunda);  // 'banana'
+console.log(resto);    // ['naranja', 'pera', 'uva']</code></pre>
+                    
+                    <h3>Valores por defecto:</h3>
+                    <pre><code>const [a = 1, b = 2, c = 3] = [10, 20];
+console.log(a); // 10
+console.log(b); // 20
+console.log(c); // 3 (valor por defecto)</code></pre>
+                    
+                    <h3>Intercambiar variables:</h3>
+                    <pre><code>let x = 1;
+let y = 2;
+
+[x, y] = [y, x];
+console.log(x); // 2
+console.log(y); // 1</code></pre>
+                </div>
+                
+                <div class="content-section">
+                    <h2>7.2. Uso del operador spread (...)</h2>
+                    <p>El operador spread expande un array en elementos individuales.</p>
+                    
+                    <h3>Copiar arrays:</h3>
+                    <pre><code>const original = [1, 2, 3];
+const copia = [...original];
+
+copia.push(4);
+console.log(original); // [1, 2, 3]
+console.log(copia);    // [1, 2, 3, 4]</code></pre>
+                    
+                    <h3>Combinar arrays:</h3>
+                    <pre><code>const array1 = [1, 2, 3];
+const array2 = [4, 5, 6];
+const array3 = [7, 8, 9];
+
+const combinado = [...array1, ...array2, ...array3];
+console.log(combinado); // [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+// Insertar elementos en medio
+const intermedio = [...array1, 10, 11, ...array2];
+console.log(intermedio); // [1, 2, 3, 10, 11, 4, 5, 6]</code></pre>
+                    
+                    <h3>Pasar elementos como argumentos:</h3>
+                    <pre><code>const numeros = [5, 1, 9, 3, 7];
+
+console.log(Math.max(...numeros)); // 9
+console.log(Math.min(...numeros)); // 1</code></pre>
+                    
+                    <h3>Convertir strings en arrays:</h3>
+                    <pre><code>const texto = 'Hola';
+const letras = [...texto];
+console.log(letras); // ['H', 'o', 'l', 'a']</code></pre>
+                </div>
+                
+                <div class="content-section">
+                    <h2>7.3. Copia y clonación de arrays</h2>
+                    
+                    <h3>Copia superficial (shallow copy):</h3>
+                    <pre><code>// Método 1: Spread operator
+const original = [1, 2, 3];
+const copia1 = [...original];
+
+// Método 2: slice()
+const copia2 = original.slice();
+
+// Método 3: Array.from()
+const copia3 = Array.from(original);
+
+// Método 4: concat()
+const copia4 = [].concat(original);</code></pre>
+                    
+                    <h3>Problema con arrays anidados:</h3>
+                    <pre><code>const original = [[1, 2], [3, 4]];
+const copia = [...original];
+
+copia[0][0] = 99;
+console.log(original); // [[99, 2], [3, 4]] - ¡Se modificó!
+console.log(copia);    // [[99, 2], [3, 4]]</code></pre>
+                    
+                    <h3>Copia profunda (deep copy):</h3>
+                    <pre><code>const original = [[1, 2], [3, 4]];
+
+// Método 1: JSON (limitaciones con funciones, undefined, etc.)
+const copiaJSON = JSON.parse(JSON.stringify(original));
+
+// Método 2: structuredClone() (moderno)
+const copiaProfunda = structuredClone(original);
+
+copiaProfunda[0][0] = 99;
+console.log(original);      // [[1, 2], [3, 4]] - No se modifica
+console.log(copiaProfunda); // [[99, 2], [3, 4]]</code></pre>
+                </div>
+                
+                <div class="content-section">
+                    <h2>7.4. Arrays multidimensionales</h2>
+                    <p>Los arrays multidimensionales son arrays que contienen otros arrays como elementos.</p>
+                    
+                    <h3>Arrays bidimensionales (matrices):</h3>
+                    <pre><code>// Matriz 3x3
+const matriz = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+];
+
+// Acceder a elementos
+console.log(matriz[0][0]); // 1
+console.log(matriz[1][2]); // 6
+console.log(matriz[2][1]); // 8
+
+// Modificar elementos
+matriz[1][1] = 50;
+console.log(matriz[1]); // [4, 50, 6]</code></pre>
+                    
+                    <h3>Recorrer matrices:</h3>
+                    <pre><code>const matriz = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+];
+
+// Con bucles anidados
+for (let i = 0; i < matriz.length; i++) {
+    for (let j = 0; j < matriz[i].length; j++) {
+        console.log(`[${i}][${j}] = ${matriz[i][j]}`);
+    }
+}
+
+// Con forEach
+matriz.forEach((fila, i) => {
+    fila.forEach((valor, j) => {
+        console.log(`[${i}][${j}] = ${valor}`);
+    });
+});</code></pre>
+                    
+                    <h3>Crear matriz dinámica:</h3>
+                    <pre><code>// Crear matriz 4x5 llena de ceros
+const filas = 4;
+const columnas = 5;
+
+const matriz = Array.from({ length: filas }, () => 
+    Array.from({ length: columnas }, () => 0)
+);
+
+console.log(matriz);
+// [[0, 0, 0, 0, 0],
+//  [0, 0, 0, 0, 0],
+//  [0, 0, 0, 0, 0],
+//  [0, 0, 0, 0, 0]]</code></pre>
+                    
+                    <h3>Aplanar arrays multidimensionales:</h3>
+                    <pre><code>const anidado = [[1, 2], [3, 4], [5, 6]];
+
+// Método 1: flat()
+const aplanado1 = anidado.flat();
+console.log(aplanado1); // [1, 2, 3, 4, 5, 6]
+
+// Arrays profundamente anidados
+const profundo = [1, [2, [3, [4]]]];
+const aplanado2 = profundo.flat(Infinity);
+console.log(aplanado2); // [1, 2, 3, 4]
+
+// Método 2: reduce + concat
+const aplanado3 = anidado.reduce((acc, arr) => acc.concat(arr), []);</code></pre>
+                </div>
+                
+                <div class="content-section">
+                    <h3>📝 Ejercicios Prácticos</h3>
+                    
+                    <div class="card" style="margin-top: 1rem;">
+                        <p><strong>Ejercicio 1:</strong> Dado el array <code>[10, 20, 30, 40, 50]</code>, usa desestructuración para extraer el primer y último elemento.</p>
+                    </div>
+                    
+                    <div class="card" style="margin-top: 1rem;">
+                        <p><strong>Ejercicio 2:</strong> Combina tres arrays diferentes usando el operador spread y ordénalos de menor a mayor.</p>
+                    </div>
+                    
+                    <div class="card" style="margin-top: 1rem;">
+                        <p><strong>Ejercicio 3:</strong> Crea una matriz 3x3 con números del 1 al 9 y calcula la suma de todos sus elementos.</p>
+                    </div>
+                    
+                    <div class="card" style="margin-top: 1rem;">
+                        <p><strong>Ejercicio 4:</strong> Dado un array anidado <code>[[1, 2], [3, [4, 5]], 6]</code>, aplánalo completamente usando <code>flat()</code>.</p>
+                    </div>
+                </div>
+                
+                <div class="page-navigation">
+                    <a href="./06-metodos-transformacion.html" class="page-nav-link prev">
+                        <span>← Anterior</span>
+                        <strong>6. Métodos de Transformación</strong>
+                    </a>
+                    <a href="./08-buenas-practicas.html" class="page-nav-link next">
+                        <span>Siguiente →</span>
+                        <strong>8. Buenas Prácticas</strong>
+                    </a>
+                </div>
+            </section>
+        </div>
+    </main>
+</body>
+</html>
