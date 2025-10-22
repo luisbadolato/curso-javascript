@@ -155,16 +155,28 @@ Luego accede a: `http://localhost:8000`
 ## 🎨 Paleta de Colores
 
 ### Light Mode
-- Background: `#ffffff` / `#f8f9fa`
-- Text: `#2d3748` / `#4a5568`
+- Background Primary: `#f5f6f8` (gris muy claro, no blanco puro)
+- Background Secondary: `#e8eaed`
+- Cards: `#ffffff` (blanco, destacan sobre el fondo)
+- Content Sections: `#fafbfc` (gris suave con borde accent izquierdo)
+- Text Primary: `#1a202c` (casi negro para mejor contraste)
+- Text Secondary: `#4a5568`
 - Accent: `#667eea`
 - Gradient: `#667eea → #764ba2`
 
 ### Dark Mode
-- Background: `#1a202c` / `#2d3748`
-- Text: `#f7fafc` / `#e2e8f0`
+- Background Primary: `#0f1419` (muy oscuro para mayor contraste)
+- Background Secondary: `#1a202c`
+- Cards: `#1a202c` (destacan sobre el fondo)
+- Content Sections: `#161b22` (tono diferente con borde accent izquierdo)
+- Text Primary: `#f7fafc`
+- Text Secondary: `#cbd5e0`
 - Accent: `#9f7aea`
 - Gradient: `#4c51bf → #6b46c1`
+
+### Diferenciación Visual
+- **Cards**: Fondo destacado, sombra pronunciada, hover interactivo con elevación
+- **Content Sections**: Fondo sutil, borde izquierdo accent de 4px, sin hover
 
 ## 🔮 Mejoras Futuras
 
