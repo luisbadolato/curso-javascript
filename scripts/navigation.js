@@ -1,10 +1,14 @@
 // Navigation component
 function createNavigation() {
+    // Detect if we're on GitHub Pages or local
+    const isGithubPages = window.location.hostname.includes('github.io');
+    const basePath = isGithubPages ? '/curso-javascript' : '';
+    
     const nav = document.createElement('nav');
     nav.className = 'nav';
     nav.innerHTML = `
         <div class="nav-container">
-            <a href="#" class="nav-logo">JS Course</a>
+            <a href="${basePath}/index.html" class="nav-logo">JS Course</a>
             
             <button class="mobile-menu-toggle" aria-label="Toggle menu">
                 <span></span>
@@ -13,6 +17,9 @@ function createNavigation() {
             </button>
             
             <ul class="nav-menu">
+                <li><a href="${basePath}/index.html" class="nav-link">Home</a></li>
+                <li><a href="${basePath}/pages/temario-global.html" class="nav-link">Temario Global</a></li>
+                <li><a href="${basePath}/pages/temario-arrays.html" class="nav-link">Arrays</a></li>
                 <li>
                     <button class="theme-toggle" aria-label="Toggle theme">
                         <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
