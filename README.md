@@ -2,6 +2,11 @@
 
 Sitio web educativo para aprender JavaScript desde conceptos básicos hasta avanzados.
 
+## 🌐 Sitio en Vivo
+
+Este sitio está desplegado en GitHub Pages y es accesible en:
+**https://luisbadolato.github.io/curso-javascript/**
+
 ## 🚀 Características
 
 - ✅ **Sitio estático**: HTML, CSS y JavaScript vanilla (sin frameworks ni bundlers)
@@ -129,6 +134,31 @@ php -S localhost:8000
 ```
 
 Luego accede a: `http://localhost:8000`
+
+## 🌐 Despliegue en GitHub Pages
+
+Este proyecto está configurado para desplegarse automáticamente en GitHub Pages mediante GitHub Actions.
+
+### Configuración Automática
+
+El sitio se despliega automáticamente cuando:
+- Se hace push a la rama `main`
+- Se puede disparar manualmente desde la pestaña "Actions" en GitHub
+
+### Configuración Manual (Solo necesaria una vez)
+
+Para habilitar GitHub Pages en tu repositorio:
+
+1. Ve a **Settings** → **Pages** en tu repositorio de GitHub
+2. En **Source**, selecciona **GitHub Actions**
+3. El workflow `.github/workflows/deploy.yml` se encargará del resto
+
+### URL del Sitio
+
+Una vez desplegado, tu sitio estará disponible en:
+```
+https://<tu-usuario>.github.io/curso-javascript/
+```
 
 ## 🎯 Módulos Disponibles
 
